@@ -9,7 +9,12 @@ import {
   Button
 } from "react-bootstrap";
 
-import { actionTypes } from "../store/actions/new-invoice.actions";
+import {
+  updateFieldValueAction,
+  addExpenseRowAction,
+  removeExpenseRowAction,
+  resetAllValuesAction
+} from "../store/actions/new-invoice.actions";
 import {
   defaultState,
   newInvoiceReducer
@@ -59,45 +64,30 @@ const TwoColumn = ({ left, right }) => (
   </Row>
 );
 
-const NewInvoice = ({ invoiceDetails = defaultState, onSubmit }) => {
-  const [state, dispatch] = useReducer(newInvoiceReducer, invoiceDetails);
+const NewInvoice = ({ invoiceId, onSubmit }) => {
+  const [state, dispatch] = useReducer(newInvoiceReducer, defaultState);
 
   const handleChange = (section, name) => e => {
-    dispatch({
-      type: actionTypes.UPDATE_FIELD_VALUE,
-      fieldType: section,
-      key: name,
-      value: e.target.value
-    });
+    dispatch(updateFieldValueAction(section, name, e.target.value));
   };
   const handleExpenseChange = (name, field) => e => {
-    dispatch({
-      type: actionTypes.UPDATE_FIELD_VALUE,
-      fieldType: "expense",
-      key: name,
-      field,
-      value: e.target.value
-    });
+    dispatch(updateFieldValueAction("expense", name, e.target.value, field));
   };
   const handleAddExpenseRow = () => {
-    dispatch({
-      type: actionTypes.ADD_EXPENSE_ROW
-    });
+    dispatch(addExpenseRowAction());
   };
   const handleRemoveExpenseRow = key => () => {
-    dispatch({
-      type: actionTypes.REMOVE_EXPENSE_ROW,
-      key
-    });
+    dispatch(removeExpenseRowAction());
   };
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(state);
+    onSubmit({
+      ...state,
+      invoiceId
+    });
   };
   const handleReset = () => {
-    dispatch({
-      type: actionTypes.RESET_ALL_VALUES
-    });
+    dispatch(resetAllValuesAction());
   };
 
   const expenseRows = Object.keys(state.expenseFields);
@@ -256,7 +246,7 @@ const NewInvoice = ({ invoiceDetails = defaultState, onSubmit }) => {
               <tbody>
                 <tr>
                   <td>Invoice no:</td>
-                  <td>INV001</td>
+                  <td>{invoiceId}</td>
                 </tr>
                 <tr>
                   <td>Invoice date:</td>

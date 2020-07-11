@@ -1,6 +1,7 @@
 import { actionTypes } from "../actions/new-invoice.actions";
 
 export const defaultState = {
+  invoiceId: "",
   mainFields: {
     companyName: "",
     employeeName: "",
@@ -18,7 +19,6 @@ export const defaultState = {
     }
   },
   otherFields: {
-    invoiceId: "",
     invoiceStartDate: "",
     invoiceDueDate: "",
     status: "Outstanding"
