@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "./components/common/Header";
 import InvoiceList from "./components/InvoiceList";
@@ -20,6 +15,7 @@ function App() {
     state.loading
   ]);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     console.log("fetching invoices");
@@ -28,9 +24,10 @@ function App() {
 
   const handleNewInvoiceSubmit = invoiceDetails => {
     console.log(invoiceDetails);
+    history.push("/home");
   };
   return (
-    <Router>
+    <Fragment>
       <Header />
       <Switch>
         <Route path="/home">
@@ -46,7 +43,7 @@ function App() {
           <Redirect to="/home" />
         </Route>
       </Switch>
-    </Router>
+    </Fragment>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useReducer, useEffect } from "react";
+import React, { Fragment, useReducer } from "react";
 import {
   Col,
   Row,
@@ -20,30 +20,14 @@ import {
   newInvoiceReducer
 } from "../store/reducers/new-invoice.reducer";
 
-const TextField = ({
-  label,
-  id,
-  placeholder,
-  defaultValue,
-  value,
-  onChange,
-  as = "input",
-  required = false
-}) => (
+const TextField = ({ label, id, defaultValue, as = "input", ...restProps }) => (
   <Form.Group as={Row} controlId={id}>
     {label && (
       <Form.Label>
         <strong>{label}</strong>
       </Form.Label>
     )}
-    <Form.Control
-      defaultValue={defaultValue}
-      onChange={onChange}
-      placeholder={placeholder}
-      as={as}
-      required={required}
-      value={value}
-    />
+    <Form.Control defaultValue={defaultValue} as={as} {...restProps} />
   </Form.Group>
 );
 
@@ -233,6 +217,20 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
               <h3 className="text-right">Total: $200</h3>
             </Col>
           </Row>
+          <Row>
+            <Col className="p-4">
+              <TextField
+                id="invoiceNotes"
+                label="Notes about the invoice:"
+                placeholder="How to pay, where to send checks..."
+                onChange={handleChange("other", "invoiceNotes")}
+                as="textarea"
+                required
+                value={state.otherFields.invoiceNotes}
+                rows="5"
+              />
+            </Col>
+          </Row>
         </Card>
         <Row>
           <Col
@@ -251,13 +249,23 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
                 <tr>
                   <td>Invoice date:</td>
                   <td>
-                    <Form.Control required type="date"></Form.Control>
+                    <Form.Control
+                      required
+                      type="date"
+                      onChange={handleChange("other", "invoiceStartDate")}
+                      value={state.otherFields.invoiceStartDate}
+                    ></Form.Control>
                   </td>
                 </tr>
                 <tr>
                   <td>Due date:</td>
                   <td>
-                    <Form.Control required type="date"></Form.Control>
+                    <Form.Control
+                      required
+                      type="date"
+                      onChange={handleChange("other", "invoiceDueDate")}
+                      value={state.otherFields.invoiceDueDate}
+                    ></Form.Control>
                   </td>
                 </tr>
                 <tr>

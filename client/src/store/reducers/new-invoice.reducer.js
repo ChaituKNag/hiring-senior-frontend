@@ -19,6 +19,7 @@ export const defaultState = {
     }
   },
   otherFields: {
+    invoiceNotes: "",
     invoiceStartDate: "",
     invoiceDueDate: "",
     status: "Outstanding"
