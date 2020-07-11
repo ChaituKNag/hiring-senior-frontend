@@ -79,31 +79,6 @@
         "invoiceDueDate": "2019-06-06",
         "status": "Late"
       }
-    },
-    {
-      "invoiceId": "INV_3",
-      "mainFields": {
-        "companyName": "p",
-        "employeeName": "p",
-        "companyAddress": "p",
-        "clientCompanyName": "p",
-        "clientName": "p",
-        "clientAddress": "p",
-        "projectTitle": "p"
-      },
-      "expenseFields": {
-        "expense_1": {
-          "description": "p",
-          "hours": "p",
-          "rate": "p"
-        }
-      },
-      "otherFields": {
-        "invoiceNotes": "p",
-        "invoiceStartDate": "2020-07-11",
-        "invoiceDueDate": "2020-07-11",
-        "status": "Outstanding"
-      }
     }
   ]
 }

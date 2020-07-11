@@ -21,15 +21,25 @@ export const fetchInvoicesFailureAction = () => ({
 
 export const fetchInvoicesAction = () => dispatch => {
   dispatch(loadingAction());
-  return axios.get("http://localhost:4000/").then(resp => {
-    return dispatch(fetchInvoicesSuccessAction(resp.data));
-  });
+  return axios
+    .get("http://localhost:4000/")
+    .then(resp => {
+      return dispatch(fetchInvoicesSuccessAction(resp.data));
+    })
+    .catch(() => {
+      return dispatch(fetchInvoicesFailureAction());
+    });
 };
 
 export const addNewInvoiceAction = invoiceDetails => dispatch => {
   dispatch(loadingAction());
-  return axios.post("http://localhost:4000/new", invoiceDetails).then(resp => {
-    console.log(resp.data);
-    return dispatch(fetchInvoicesSuccessAction(resp.data));
-  });
+  return axios
+    .post("http://localhost:4000/new", invoiceDetails)
+    .then(resp => {
+      console.log(resp.data);
+      return dispatch(fetchInvoicesSuccessAction(resp.data));
+    })
+    .catch(() => {
+      return dispatch(fetchInvoicesFailureAction());
+    });
 };
