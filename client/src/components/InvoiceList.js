@@ -63,7 +63,7 @@ const InvoiceList = ({ invoices }) => {
             </Card.Title>
             <h5 className="mt-4 mb-4">Main Details</h5>
             <Row>
-              <Col>
+              <Col md={6} className="mb-2">
                 <Card>
                   <Card.Body>
                     <p>
@@ -81,7 +81,7 @@ const InvoiceList = ({ invoices }) => {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col>
+              <Col md={6} className="mb-2">
                 <Card>
                   <Card.Body>
                     <p>

@@ -75,6 +75,10 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
   };
 
   const expenseRows = Object.keys(state.expenseFields);
+  const total = expenseRows.reduce((acc, key) => {
+    const { hours, rate } = state.expenseFields[key];
+    return acc + Number(hours) * Number(rate);
+  }, 0);
   return (
     <Container className="mb-5">
       <h1 className="text-center m-3">New Invoice</h1>
@@ -181,6 +185,7 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
                         <Form.Control
                           required
                           placeholder="10"
+                          type="number"
                           onChange={handleExpenseChange(expenseKey, "hours")}
                           value={state.expenseFields[expenseKey].hours}
                         ></Form.Control>
@@ -189,6 +194,7 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
                         <Form.Control
                           required
                           placeholder="80"
+                          type="number"
                           onChange={handleExpenseChange(expenseKey, "rate")}
                           value={state.expenseFields[expenseKey].rate}
                         ></Form.Control>
@@ -214,7 +220,7 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
               </Button>
             </Col>
             <Col>
-              <h3 className="text-right">Total: $200</h3>
+              <h3 className="text-right">Total: ${total}</h3>
             </Col>
           </Row>
           <Row>
