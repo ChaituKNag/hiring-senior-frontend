@@ -7,9 +7,10 @@ import Header from "./components/common/Header";
 import InvoiceList from "./components/InvoiceList";
 import NewInvoice from "./components/NewInvoice";
 import { fetchInvoicesAction } from "./store/actions";
+import { Modal, Spinner } from "react-bootstrap";
 
 function App() {
-  const [invoices, count] = useSelector(state => [
+  const [invoices, count, loading] = useSelector(state => [
     state.invoices,
     state.count,
     state.loading
@@ -29,6 +30,15 @@ function App() {
   return (
     <Fragment>
       <Header />
+      <Modal show={loading} centered>
+        <Modal.Body className="d-flex align-items-center">
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>{" "}
+          <span className="ml-2">Loading...</span>
+        </Modal.Body>
+      </Modal>
+
       <Switch>
         <Route path="/home">
           <InvoiceList invoices={invoices} />

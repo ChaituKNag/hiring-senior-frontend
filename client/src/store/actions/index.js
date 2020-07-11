@@ -1,4 +1,4 @@
-import mockInvoices from "../../mocks/invoices.json";
+import axios from "axios";
 
 export const actionTypes = {
   FETCHING_INVOICES: "FETCHING_INVOICES",
@@ -7,7 +7,10 @@ export const actionTypes = {
 };
 
 export const fetchInvoicesAction = () => dispatch => {
-  dispatch(fetchInvoicesSuccessAction(mockInvoices));
+  dispatch(fetchingInvoicesAction());
+  axios.get("http://localhost:4000/").then(resp => {
+    dispatch(fetchInvoicesSuccessAction(resp.data));
+  });
 };
 
 export const fetchingInvoicesAction = () => ({
