@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Header from "./components/common/Header";
 import InvoiceList from "./components/InvoiceList";
 import NewInvoice from "./components/NewInvoice";
-import { fetchInvoicesAction } from "./store/actions";
+import { fetchInvoicesAction, addNewInvoiceAction } from "./store/actions";
 import { Modal, Spinner } from "react-bootstrap";
 
 function App() {
@@ -25,7 +25,9 @@ function App() {
 
   const handleNewInvoiceSubmit = invoiceDetails => {
     console.log(invoiceDetails);
-    history.push("/home");
+    dispatch(addNewInvoiceAction(invoiceDetails)).then(() => {
+      history.push("/home");
+    });
   };
   return (
     <Fragment>

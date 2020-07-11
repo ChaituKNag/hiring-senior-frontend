@@ -8,7 +8,7 @@ export const defaultState = {
 
 export function rootReducer(state, action) {
   switch (action.type) {
-    case actionTypes.FETCHING_INVOICES:
+    case actionTypes.LOADING:
       return {
         ...state,
         loading: true

@@ -1,20 +1,13 @@
 import axios from "axios";
 
 export const actionTypes = {
-  FETCHING_INVOICES: "FETCHING_INVOICES",
+  LOADING: "LOADING",
   FETCH_INVOICES_SUCCESS: "FETCH_INVOICES_SUCCESS",
   FETCH_INVOICES_FAILURE: "FETCH_INVOICES_FAILURE"
 };
 
-export const fetchInvoicesAction = () => dispatch => {
-  dispatch(fetchingInvoicesAction());
-  axios.get("http://localhost:4000/").then(resp => {
-    dispatch(fetchInvoicesSuccessAction(resp.data));
-  });
-};
-
-export const fetchingInvoicesAction = () => ({
-  type: actionTypes.FETCHING_INVOICES
+export const loadingAction = () => ({
+  type: actionTypes.LOADING
 });
 
 export const fetchInvoicesSuccessAction = invoices => ({
@@ -25,3 +18,18 @@ export const fetchInvoicesSuccessAction = invoices => ({
 export const fetchInvoicesFailureAction = () => ({
   type: actionTypes.FETCH_INVOICES_FAILURE
 });
+
+export const fetchInvoicesAction = () => dispatch => {
+  dispatch(loadingAction());
+  return axios.get("http://localhost:4000/").then(resp => {
+    return dispatch(fetchInvoicesSuccessAction(resp.data));
+  });
+};
+
+export const addNewInvoiceAction = invoiceDetails => dispatch => {
+  dispatch(loadingAction());
+  return axios.post("http://localhost:4000/new", invoiceDetails).then(resp => {
+    console.log(resp.data);
+    return dispatch(fetchInvoicesSuccessAction(resp.data));
+  });
+};
