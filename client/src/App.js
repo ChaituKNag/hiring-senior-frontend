@@ -12,6 +12,9 @@ import InvoiceList from "./components/InvoiceList";
 import NewInvoice from "./components/NewInvoice";
 
 function App() {
+  const handleNewInvoiceSubmit = invoiceDetails => {
+    console.log(invoiceDetails);
+  };
   return (
     <Router>
       <Header />
@@ -20,7 +23,7 @@ function App() {
           <InvoiceList />
         </Route>
         <Route path="/new-invoice">
-          <NewInvoice />
+          <NewInvoice onSubmit={handleNewInvoiceSubmit} />
         </Route>
         <Route path="/">
           <Redirect to="/home" />
