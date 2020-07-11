@@ -18,8 +18,17 @@ app.listen(4000, () => {
 });
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   const allInvoices = db.get("invoices").value();
   res.json(allInvoices);
+});
+
+app.post("/new", (req, res) => {
+  console.log(req.body);
+  db.get("invoices")
+    .unshift(req.body)
+    .write();
+  res.send(db.get("invoices").value());
 });
