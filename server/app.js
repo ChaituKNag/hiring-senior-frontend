@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/new", (req, res) => {
-  console.log(req.body);
   db.get("invoices")
     .unshift(req.body)
     .write();

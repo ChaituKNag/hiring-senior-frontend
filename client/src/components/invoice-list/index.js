@@ -1,47 +1,24 @@
 import React from "react";
-import {
-  Container,
-  Alert,
-  Card,
-  Row,
-  Col,
-  Badge,
-  Table
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-const calculateTotal = invoice =>
-  Object.values(invoice.expenseFields).reduce((acc, curr) => {
-    return acc + Number(curr.hours) * Number(curr.rate);
-  }, 0);
-
-const formatDate = dateString => new Date(dateString).toLocaleDateString();
+import { Container, Card, Row, Col, Badge, Table } from "react-bootstrap";
+import InvoicesLoading from "./InvoicesLoading";
+import NoInvoices from "./NoInvoices";
+import InvoiceItem from "./InvoiceItem";
+import formatDate from "../../utils/format-date";
+import calculateTotal from "../../utils/calculate-total";
 
 const InvoiceList = ({ invoices }) => {
   if (!invoices) {
-    return (
-      <Container className="mt-5 mb-5">
-        <Alert variant="warning">
-          Loading... If this shows longer, there is some issue with the backend.
-        </Alert>
-      </Container>
-    );
+    return <InvoicesLoading />;
   }
 
   if (invoices.length === 0) {
-    return (
-      <Container className="mt-5 mb-5">
-        <Alert variant="info">
-          No invoices yet! <Link to="/new-invoice">Create new...</Link>
-        </Alert>
-      </Container>
-    );
+    return <NoInvoices />;
   }
 
   return (
     <Container>
-      <h1 className="mt-4 mb-4">List of Invoices</h1>
-      {invoices.map((invoice, idx) => (
+      <h1 className="mt-4 mb-4 text-center">List of Invoices</h1>
+      {invoices.map(invoice => (
         <Card key={invoice.invoiceId} className="mb-4">
           <Card.Body>
             <Card.Title>
@@ -72,36 +49,36 @@ const InvoiceList = ({ invoices }) => {
               <Col md={6} className="mb-2">
                 <Card>
                   <Card.Body>
-                    <p>
-                      <strong>Company name</strong>
-                    </p>
-                    <p>{invoice.mainFields.companyName}</p>
-                    <p>
-                      <strong>Employee name</strong>
-                    </p>
-                    <p>{invoice.mainFields.employeeName}</p>
-                    <p>
-                      <strong>Company address</strong>
-                    </p>
-                    <p>{invoice.mainFields.companyAddress}</p>
+                    <InvoiceItem
+                      label="Company name"
+                      value={invoice.mainFields.companyName}
+                    />
+                    <InvoiceItem
+                      label="Employee name"
+                      value={invoice.mainFields.employeeName}
+                    />
+                    <InvoiceItem
+                      label="Company address"
+                      value={invoice.mainFields.companyAddress}
+                    />
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={6} className="mb-2">
                 <Card>
                   <Card.Body>
-                    <p>
-                      <strong>Client company name</strong>
-                    </p>
-                    <p>{invoice.mainFields.clientCompanyName}</p>
-                    <p>
-                      <strong>Client name</strong>
-                    </p>
-                    <p>{invoice.mainFields.clientName}</p>
-                    <p>
-                      <strong>Client address</strong>
-                    </p>
-                    <p>{invoice.mainFields.clientAddress}</p>
+                    <InvoiceItem
+                      label="Client company name"
+                      value={invoice.mainFields.clientCompanyName}
+                    />
+                    <InvoiceItem
+                      label="Client name"
+                      value={invoice.mainFields.clientName}
+                    />
+                    <InvoiceItem
+                      label="Client address"
+                      value={invoice.mainFields.clientAddress}
+                    />
                   </Card.Body>
                 </Card>
               </Col>
@@ -127,23 +104,22 @@ const InvoiceList = ({ invoices }) => {
               </tbody>
             </Table>
             <h2 className="text-right text-info">
-              Total: ${calculateTotal(invoice)}
+              Total: ${calculateTotal(invoice.expenseFields)}
             </h2>
             <h5 className="mt-4 mb-4">Other details</h5>
-            <p>
-              <strong>Notes:</strong>
-            </p>
-            <p>{invoice.otherFields.invoiceNotes}</p>
-            <p>
-              <strong>Invoice start date:</strong>
-            </p>
-            <p>{formatDate(invoice.otherFields.invoiceStartDate)}</p>
-            <p>
-              <strong>Invoice due date:</strong>
-            </p>
-            <p className="text-danger">
-              {formatDate(invoice.otherFields.invoiceDueDate)}
-            </p>
+            <InvoiceItem
+              label="Notes"
+              value={invoice.otherFields.invoiceNotes}
+            />
+            <InvoiceItem
+              label="Invoice start date"
+              value={formatDate(invoice.otherFields.invoiceStartDate)}
+            />
+            <InvoiceItem
+              label="Invoice due date"
+              value={formatDate(invoice.otherFields.invoiceDueDate)}
+              className="text-danger"
+            />
           </Card.Body>
         </Card>
       ))}

@@ -36,7 +36,6 @@ export const addNewInvoiceAction = invoiceDetails => dispatch => {
   return axios
     .post("http://localhost:4000/new", invoiceDetails)
     .then(resp => {
-      console.log(resp.data);
       return dispatch(fetchInvoicesSuccessAction(resp.data));
     })
     .catch(() => {
