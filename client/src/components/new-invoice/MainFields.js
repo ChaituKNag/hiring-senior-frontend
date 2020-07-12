@@ -83,7 +83,7 @@ const MainFields = ({ mainFields, handleChange }) => {
 };
 
 MainFields.propTypes = {
-  mainFields: PropTypes.array.isRequired,
+  mainFields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired
 };
 

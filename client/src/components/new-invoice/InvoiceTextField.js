@@ -2,13 +2,7 @@ import React from "react";
 import { Form, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const InvoiceTextField = ({
-  label,
-  id,
-  defaultValue,
-  as = "input",
-  ...restProps
-}) => {
+const InvoiceTextField = ({ label, id, as = "input", ...restProps }) => {
   return (
     <Form.Group as={Row} controlId={id}>
       {label && (
@@ -16,7 +10,7 @@ const InvoiceTextField = ({
           <strong>{label}</strong>
         </Form.Label>
       )}
-      <Form.Control defaultValue={defaultValue} as={as} {...restProps} />
+      <Form.Control as={as} {...restProps} />
     </Form.Group>
   );
 };
@@ -24,12 +18,10 @@ const InvoiceTextField = ({
 InvoiceTextField.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string,
   as: PropTypes.string
 };
 
 InvoiceTextField.defaultProps = {
-  defaultValue: "",
   as: "input"
 };
 
