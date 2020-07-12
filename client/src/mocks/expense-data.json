@@ -1,0 +1,22 @@
+{
+  "expense_1": {
+    "description": "Planning",
+    "hours": "20",
+    "rate": "10"
+  },
+  "expense_2": {
+    "description": "Architecture",
+    "hours": "10",
+    "rate": "20"
+  },
+  "expense_3": {
+    "description": "Development",
+    "hours": "40",
+    "rate": "25"
+  },
+  "expense_4": {
+    "description": "Build and release",
+    "hours": "20",
+    "rate": "15"
+  }
+}

@@ -71,7 +71,11 @@ const ExpenseFields = ({
       )}
       <Row>
         <Col>
-          <Button variant="info" onClick={handleAddExpenseRow}>
+          <Button
+            variant="info"
+            onClick={handleAddExpenseRow}
+            data-testid="add-expense-button"
+          >
             Add expense row
           </Button>
         </Col>
@@ -84,7 +88,7 @@ const ExpenseFields = ({
 };
 
 ExpenseFields.propTypes = {
-  expenseFields: PropTypes.array.isRequired,
+  expenseFields: PropTypes.object.isRequired,
   handleExpenseChange: PropTypes.func.isRequired,
   handleRemoveExpenseRow: PropTypes.func.isRequired,
   handleAddExpenseRow: PropTypes.func.isRequired
