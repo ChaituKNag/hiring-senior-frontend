@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import SingleColumn from "../common/SingleColumn";
 import { Table, Form, Button, Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 import calculateTotal from "../../utils/calculate-total";
 
 const ExpenseFields = ({
@@ -80,6 +81,13 @@ const ExpenseFields = ({
       </Row>
     </Fragment>
   );
+};
+
+ExpenseFields.propTypes = {
+  expenseFields: PropTypes.array.isRequired,
+  handleExpenseChange: PropTypes.func.isRequired,
+  handleRemoveExpenseRow: PropTypes.func.isRequired,
+  handleAddExpenseRow: PropTypes.func.isRequired
 };
 
 export default ExpenseFields;

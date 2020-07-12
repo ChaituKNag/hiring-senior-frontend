@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Card, Row, Col, Badge, Table } from "react-bootstrap";
+import PropTypes from "prop-types";
 import InvoicesLoading from "./InvoicesLoading";
 import NoInvoices from "./NoInvoices";
 import InvoiceItem from "./InvoiceItem";
@@ -125,6 +126,10 @@ const InvoiceList = ({ invoices }) => {
       ))}
     </Container>
   );
+};
+
+InvoiceList.propTypes = {
+  invoices: PropTypes.array
 };
 
 export default InvoiceList;

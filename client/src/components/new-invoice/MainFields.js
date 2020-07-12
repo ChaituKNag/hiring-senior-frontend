@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import TwoColumns from "../common/TwoColumns";
 import TextField from "./InvoiceTextField";
 import SingleColumn from "../common/SingleColumn";
+import PropTypes from "prop-types";
 
 const MainFields = ({ mainFields, handleChange }) => {
   return (
@@ -79,6 +80,11 @@ const MainFields = ({ mainFields, handleChange }) => {
       </SingleColumn>
     </Fragment>
   );
+};
+
+MainFields.propTypes = {
+  mainFields: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired
 };
 
 export default MainFields;

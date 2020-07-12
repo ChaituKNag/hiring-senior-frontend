@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const TwoColumns = ({ left, right }) => {
   return (
@@ -12,6 +13,11 @@ const TwoColumns = ({ left, right }) => {
       </Col>
     </Row>
   );
+};
+
+TwoColumns.propTypes = {
+  left: PropTypes.element.isRequired,
+  right: PropTypes.element.isRequired
 };
 
 export default TwoColumns;

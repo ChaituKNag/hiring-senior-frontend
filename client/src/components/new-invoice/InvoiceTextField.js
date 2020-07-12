@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const InvoiceTextField = ({
   label,
@@ -18,6 +19,18 @@ const InvoiceTextField = ({
       <Form.Control defaultValue={defaultValue} as={as} {...restProps} />
     </Form.Group>
   );
+};
+
+InvoiceTextField.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string,
+  as: PropTypes.string
+};
+
+InvoiceTextField.defaultProps = {
+  defaultValue: "",
+  as: "input"
 };
 
 export default InvoiceTextField;

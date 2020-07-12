@@ -8,6 +8,7 @@ import {
   Table,
   Button
 } from "react-bootstrap";
+import PropTypes from "prop-types";
 import MainFields from "./MainFields";
 import ExpenseFields from "./ExpenseFields";
 import TextField from "./InvoiceTextField";
@@ -156,6 +157,11 @@ const NewInvoice = ({ invoiceId, onSubmit }) => {
       </Form>
     </Container>
   );
+};
+
+NewInvoice.propTypes = {
+  invoiceId: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default NewInvoice;
