@@ -33,6 +33,16 @@ Client app starts on this URL: `http://localhost:3000`
 
 Now, simply go to `http://localhost:3000` to view the app.
 
+## Testing the client app
+
+Please run the following command to run the tests on the front-end app:
+
+```bash
+# from root directory
+cd client
+yarn test
+```
+
 # Technical tools used:
 
 Client:
